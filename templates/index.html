@@ -1,0 +1,166 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>Planto · Bootstrap v5.2</title>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <meta name="theme-color" content="#712cf9">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .bg-mine{
+        background-image: url("./static/download.jpg");
+        background-color: #3a3b3b5a;
+        background-blend-mode: multiply;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        width: 50vw;
+        margin: 0 auto;  
+      }
+
+      .my-img{
+        max-height: 300px;
+        max-width: 300px;
+        padding: 200px;
+      }
+    </style>
+    <script>
+      var plant, disease
+    </script>
+
+  </head>
+  <body class="d-flex min-h-100 text-center text-white bg-mine d-flex">
+        <div class="cover-container d-flex w-100 min-vh-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+            <h3 class="float-md-start mb-0 text-light">Planto</h3>
+            <!-- <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
+                <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>
+                <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
+            </nav> -->
+        </div>
+        </header>
+
+        <main class="px-3 ">
+            <h1>Plant Disease Prediction.</h1>
+            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed magnam quis, eius adipisci neque exercitationem dolore. Nisi delectus velit voluptatibus? Facilis, architecto ratione necessitatibus veniam pariatur quasi vero minus earum?</p>
+            <img id="blah"  class="p-3 my-img"  src="https://imgs.search.brave.com/qwbBO9ZQl4fBgI6_FsfipdAx2KVj7z0eSJpxu_OaDA8/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC51/c2NvNHlYbGZ5Y2pN/bHR3YlRVMjZBSGFG/aiZwaWQ9QXBp" alt="your image" />
+            <form id="prospects_form">
+                <p class="lead" >
+                    <input type="file" id="file" required accept="image/*" class="btn btn-lg btn-secondary  border-white bg-white text-black" onchange="readURL(this);"></input>
+                    <input type="submit" id="submit" class="btn btn-lg btn-secondary  border-info bg-info text-black"></input>
+                </p>
+            </form>
+            <hr>
+            <h2 id="plant"></h2>
+            <h2 id="disease" class="pb-4"></h2>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+        </footer>
+        </div>    
+  </body>
+    <script defer>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#prospects_form").submit(async function(e) {
+            e.preventDefault();
+            const formData = new FormData()
+            const files = document.getElementById("file").files
+            formData.append('myFile', files[0])
+
+            k = await fetch('/perdict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // alert(data["plant"]+" " + data["disease"] )
+                var plant = document.getElementById("plant")
+                var disease = document.getElementById("disease")
+                plant.innerHTML = "<b class=\"text-info\">Plant:</b> " + data["plant"]
+                disease.innerHTML = "<b class=\"text-info\">Disease:</b> " + data["disease"]
+            })
+            .catch(error => {
+                console.error(error)
+            })
+            console.log(k);
+        });
+    </script>
+</html>
